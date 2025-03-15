@@ -7,6 +7,8 @@ public class ObjectsDetector : MonoBehaviour
 
     private List<Rigidbody> _contactingObjects = new();
 
+    public IReadOnlyList<Rigidbody> ContactingObjects => _contactingObjects.AsReadOnly();
+
     private void Awake()
     {
         _collider.isTrigger = true;
@@ -27,10 +29,5 @@ public class ObjectsDetector : MonoBehaviour
     public void SetRadius(float radius)
     {
         _collider.radius = radius;
-    }
-
-    public List<Rigidbody> GetAllContactingObjects()
-    {
-        return _contactingObjects;
     }
 }

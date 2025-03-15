@@ -19,7 +19,7 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
         Pool = new(CreateObject, OnGetObject, OnReleaseObject);
     }
 
-    private T CreateObject()
+    protected virtual T CreateObject()
     {
         T obj = Instantiate(_prefab);
         CreatedObjectsCount++;

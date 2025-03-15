@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using @Random = UnityEngine.Random;
 
@@ -12,6 +11,7 @@ public class Bomb : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private float _strength;
     [SerializeField] private ObjectsDetector _objectsDetector;
+    [SerializeField] private Exploader _exploader;
 
     private Color _transparentColor = new(1, 1, 1, 0);
 
@@ -31,16 +31,17 @@ public class Bomb : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(_meshRenderer.material.DOColor(_transparentColor, Random.Range(_minLifeTime, _maxLifeTime)));
-        sequence.AppendCallback(Explosion);
+        sequence.AppendCallback(Exploade);
     }
 
-    public void Explosion()
+    public void SetExploader(Exploader exploader)
     {
-        List<Rigidbody> objects = _objectsDetector.GetAllContactingObjects();
+        _exploader = exploader;
+    }
 
-        foreach (Rigidbody rigidbody in objects)
-            rigidbody.AddExplosionForce(_strength, transform.position, _radius);
-
+    public void Exploade()
+    {
+        _exploader.Explode(transform.position, _objectsDetector.ContactingObjects, _strength, _radius);
         Exploded?.Invoke(this);
         ResetToBase();
     }
