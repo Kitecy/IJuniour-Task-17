@@ -123,11 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9982135e99061d845bf6f36569c716ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minLifeTime: 2
-  _maxLifeTime: 5
+  MinLifeTime: 2
+  MaxLifeTime: 5
   _radius: 5
   _strength: 100
   _objectsDetector: {fileID: 3585447345473934732}
+  _exploader: {fileID: 0}
 --- !u!54 &6178943761228775110
 Rigidbody:
   m_ObjectHideFlags: 0
